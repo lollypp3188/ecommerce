@@ -1,0 +1,52 @@
+version: '3.9'
+
+
+services:
+  django:
+    container_name: django
+    build:
+      context: .
+    command: sh -c "python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"  
+    volumes:
+      - ./app:/app
+      - dev-static-data:/vol/web
+    ports:
+      - 8001:8000
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=12i2ii2sgst
+      - ALLOWED_HOSTS=localhost,127.0.0.1
+  
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  celery:
+    container_name: celery
+    build:
+      context: .
+    command: celery -A app --loglevel=info  # Update with your project name
+    volumes:
+      - ./app:/app
+    depends_on:
+      - django
+      - redis
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme
+
+
+volumes:
+  dev-db-data:
+  dev-static-data:
