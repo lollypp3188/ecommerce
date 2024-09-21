@@ -17,6 +17,8 @@ services:
       - DEBUG=1
       - SECRET_KEY=12i2ii2sgst
       - ALLOWED_HOSTS=localhost,127.0.0.1
+    depends_on:
+    - db
   
   redis:
     image: redis:alpine
