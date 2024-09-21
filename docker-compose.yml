@@ -19,6 +19,7 @@ services:
       - ALLOWED_HOSTS=localhost,127.0.0.1
     depends_on:
     - db
+    - redis
   
   redis:
     image: redis:alpine
@@ -30,7 +31,7 @@ services:
     container_name: celery
     build:
       context: .
-    command: celery -A app --loglevel=info  # Update with your project name
+    command: sh -c "./wait-for-it.sh redis 6379 -- celery --app=app worker -l INFO"
     volumes:
       - ./app:/app
     depends_on:
@@ -38,6 +39,7 @@ services:
       - redis
     environment:
       - CELERY_BROKER_URL=redis://redis:6379/0
+
 
   db:
     image: postgres:13-alpine
