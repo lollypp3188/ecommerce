@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-	  <title> Edenthought </title>
+	<title> AnnaStore </title>
 
 
 
@@ -51,7 +51,7 @@
 
         <a class="navbar-brand main-heading text-white" href="{% url 'store' %}"> 
                 
-        &nbsp; &nbsp; Edenthought 
+        &nbsp; &nbsp; AnnaStore 
         
         </a>
 
@@ -91,7 +91,14 @@
                         
                         </li>
                     
-        
+                    {% for category in all_categories %}
+
+                        <li>
+                                
+                            <a class="dropdown-item" href="{{ category.get_absolute_url }}">{{ category.name | capfirst }}</a>
+                        
+                        </li>
+                    {% endfor %}
                     
                     </ul>
 
@@ -126,7 +133,7 @@
 
                 <li class="nav-item">
 
-                    <a type="button" role="button" href="/" class="btn btn-outline-secondary"> 
+                    <a type="button" role="button" href="{% url 'cart-summary' %}" class="btn btn-outline-secondary"> 
                     
 
 
