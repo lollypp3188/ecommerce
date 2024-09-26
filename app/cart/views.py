@@ -7,9 +7,9 @@ import uuid
 
 
 def cart_summary(request):
-  cart = Cart(request)
-  context = {'cart': cart}
-  return render(request, 'cart/cart-summary.html', context)
+    cart = Cart(request)
+    context = {'cart': cart}
+    return render(request, 'cart/cart-summary.html', context)
 
 
 def cart_add(request):
@@ -39,9 +39,52 @@ def cart_add(request):
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
 
+
 def cart_delete(request):
-  pass
+    cart = Cart(request)
+    if request.POST.get('action') == 'delete':
+        product_id = request.POST.get('product_id')
+
+        if product_id:
+            cart.delete(product=product_id)
+            cart_quantity = cart.__len__()
+            cart_total = cart.get_total()
+
+            return JsonResponse({
+                'qty': cart_quantity,
+                'cart_total': cart_total
+            })
+
+        return JsonResponse({'error': 'Product ID is missing'}, status=400)
+
+    return JsonResponse({'error': 'Invalid action'}, status=400)
+
 
 
 def cart_update(request):
-  pass
+    cart = Cart(request)
+
+    if request.POST.get('action') != 'post':
+        return JsonResponse({'error': 'Invalid action'}, status=400)
+    product_id = request.POST.get('product_id')
+    if not product_id:
+        return JsonResponse({'error': 'Product ID is missing'}, status=400)
+
+    product_quantity = request.POST.get('product_quantity')
+    if not product_quantity or not product_quantity.isdigit():
+        return JsonResponse({'error': 'Invalid product quantity'}, status=400)
+
+    product_quantity = int(product_quantity)
+    if product_quantity <= 0:
+        return JsonResponse({'error': 'Product quantity must be greater than zero'}, status=400)
+
+    cart.update(product=product_id, qty=product_quantity)
+
+    cart_quantity = cart.__len__()
+    cart_total = cart.get_total()
+
+    return JsonResponse({
+        'qty': cart_quantity,
+        'cart_total': cart_total
+    })
+
