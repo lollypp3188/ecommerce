@@ -158,4 +158,4 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = "annayakymovaaa@gmail.com"
 
-EMAIL_HOST_PASSWORD = "xslv mgvt gdbj btso"
+
