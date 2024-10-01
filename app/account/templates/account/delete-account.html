@@ -12,12 +12,13 @@
     <div class="container bg-white shadow-md p-5 form-layout">
       <h3>Delete your account</h3>
       <hr>
+      <p> Are you sure that you want to delete account? </p>
       <br>
       <form method="POST" autocomplete="off">
         {% csrf_token %}
-        <p> Are you sure that you want to delete account? </p>
-        <br>
-        <button type="submit" class="btn btn-danger btn-lg w-100 btn-block p-2">Delete your account</button>
+        <button type="submit" class="btn btn-primary navbar-btn text-white">Delete your account</button>
+        <br> <br>
+        <a type="button" href="{% url 'profile-management' %}" class="btn btn-success navbar-btn text-white">Go back</a>
       </form>
     </div>
   </body>

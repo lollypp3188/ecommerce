@@ -20,17 +20,15 @@
     <div class="container bg-white shadow-md p-5 form-layout">
       <h4> Track your orders </h4>
       <hr>
-      <a class="btn btn-alert navbar-btn " type="button"  href="{% url 'logout-user' %}"> My orders </a>
+      <p>Track all of your orders here...</p>
+
+      <a class="btn btn-primary navbar-btn text-white" type="button"  href="{% url 'logout-user' %}"> My orders </a>
     </div>
     <br>
     <div class="container bg-white shadow-md p-5 form-layout">
       <h4> Manage your account </h4>
       <hr>
-      <a class="btn btn-alert navbar-btn " type="button"  href="{% url 'profile-management' %}"> Profile management </a>
-      <br> <br>
-      <a class="btn btn-danger navbar-btn text-white" type="button"  href="{% url 'logout-user' %}"> Logout </a>
-      <br> <br>
-      <a class="btn btn-danger navbar-btn text-white" type="button"  href="{% url 'delete-account' %}"> Delete your account </a>
+      <a class="btn btn-primary navbar-btn text-white" type="button"  href="{% url 'profile-management' %}"> Profile management </a>
     </div>
 
 </body>

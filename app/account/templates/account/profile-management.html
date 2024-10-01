@@ -7,9 +7,11 @@
       background-color: gray;
     }
   </style>
-  
   <div class="container bg-white shadow-md p-5 form-layout mt-5">
-    <h3>Update your account</h3>
+    <h3> <i class="fa fa-address-book" aria-hidden="true"></i> &nbsp; Profile management </h3>
+  </div>
+  <div class="container bg-white shadow-md p-5 form-layout mt-5">
+    <h4>Update your account</h4>
     <hr>
     <h5>Purchase your favourite items today!</h5>
     <form method="POST" autocomplete="off" class="mt-4">
@@ -17,13 +19,15 @@
       {{ user_form.username|as_crispy_field }}
       <br>
       {{ user_form.email|as_crispy_field }}
-      <button type="submit" class="btn btn-secondary btn-lg w-100 mt-4">Update your account</button>
+      <br> <br>
+      <button type="submit" class="btn btn-primary navbar-btn text-white">Update your account</button>
     </form>
   </div>
-
+  <br>
   <div class="container bg-white shadow-md p-5 form-layout mt-4">
-    <h4>Proceed if you want to delete your account.</h4>
-    <br>
-    <a class="btn btn-danger text-white btn-lg w-100 mt-4" type="button" href="{% url 'delete-account' %}"> Delete your account </a>
+    <h4>Delete your account</h4>
+    <hr>
+    <p>Proceed if you want to delete your account.</p>
+    <a class="btn btn-primary navbar-btn text-white" type="button" href="{% url 'delete-account' %}"> Delete your account </a>
   </div>
 {% endblock %}
