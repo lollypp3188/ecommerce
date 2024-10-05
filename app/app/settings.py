@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'store',
     'cart',
     'account',
+    'payment',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -158,4 +159,6 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = "annayakymovaaa@gmail.com"
 
+EMAIL_HOST_PASSWORD = "your password"
 
+SECURE_CROSS_ORIGIN_OPENER_POLICY='same-origin-allow-popups'

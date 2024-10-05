@@ -73,4 +73,3 @@ def complete_order(request):
         order_success = True
         response = JsonResponse({'success': order_success})
         return response
-

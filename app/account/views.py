@@ -28,7 +28,7 @@ from django.contrib.auth import (
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from payment.forms import ShippingForm
-from payment.models import ShippingAddress
+from payment.models import OrderItem, ShippingAddress
 
 
 def register(request):
@@ -151,3 +151,10 @@ def manage_shipping(request):
     context = {'form': form}
     return render(request, 'account/manage-shipping.html', context)
 
+
+@login_required(login_url='my-login')
+def track_orders(request):
+    orders = OrderItem.objects.filter(user=request.user)
+    print(f"User: {request.user}, Orders: {orders}") 
+    context = {'orders': orders}
+    return render(request, 'account/track-orders.html', context=context)
